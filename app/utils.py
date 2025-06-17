@@ -1,10 +1,9 @@
 import fitz
 
 def extract_text(file):
-    """
-    Extract plain text from a PDF or txt File.
 
-    """
+    #Extract plain text from a PDF or txt File.
+
     if file.name.endswith('.pdf'):
         text=""
         doc=fitz.open(stream=file.read(), filetype="pdf")

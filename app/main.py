@@ -2,7 +2,7 @@ import torch
 import streamlit as st
 
 from utils import extract_text
-from llm_utils import generate_flashcards
+from gemini_flashcards_test import generate_flashcards
 
 #PAGE SETUP:
 st.set_page_config(page_title="Flashcard Generator", layout="wide")
@@ -48,7 +48,8 @@ with st.expander("📂 Upload or Paste Content", expanded=True):
 with st.sidebar:
     st.title("🧠 Settings")
     subject = st.selectbox("🎓 Subject (optional)", ["General", "Biology", "History", "Computer Science", "Physics", "Chemistry"])
-
+    difficulty = st.selectbox("🧩 Difficulty Level", ["Easy", "Medium", "Hard"])
+    num_flashcards=st.slider("🔢 Number of Flashcards", 5,15,20)
 #EXTRACT TEXT INTO SESSION STATE
 if "extracted_text" not in st.session_state:
     if uploaded_file:
@@ -90,18 +91,40 @@ if st.button("Generate Flashcards"):
     content = st.session_state.get("extracted_text", "").strip()
     if content:
         with st.spinner("Generating flashcards..."):
-            flashcards = generate_flashcards(content, subject)
+            flashcards = generate_flashcards(content, subject, num_flashcards, difficulty)
+if flashcards:
+    st.subheader("Generated Flashcards:")
+    for i, card in enumerate(flashcards):
+        st.markdown(f"**Q{i+1}: {card['question']}**")
+        st.markdown(f"A{i+1}: {card['answer']}")
+        st.markdown(f"*Difficulty: {card.get('difficulty', 'Medium')}*")
+        st.markdown("----")
 
-        if flashcards:
-            st.subheader("Generated Flashcards:")
-            for i, card in enumerate(flashcards):
-                st.markdown(f"**Q{i+1}: {card['question']}**")
-                st.markdown(f"A{i+1}: {card['answer']}")
-                st.markdown("----")
-        else:
-            st.warning("No flashcards generated. Try with different content.")
-    else:
-        st.warning("Please upload or paste text before generating flashcards.")
+    #Export buttons
+    st.subheader("Export Flashcards")
+
+    #Convert to JSON and CSV
+    import json
+    import pandas as pd
+
+    json_data = json.dumps(flashcards, indent=2)
+    csv_data = pd.DataFrame(flashcards).to_csv(index=False).encode("utf-8")
+
+    #JSON download
+    st.download_button(
+        label="Download as JSON",
+        data=json_data,
+        file_name="flashcards.json",
+        mime="application/json"
+    )
+
+    #CSV download
+    st.download_button(
+        label="Download as CSV",
+        data=csv_data,
+        file_name="flashcards.csv",
+        mime="text/csv"
+    )
 
 #RESET SESSION (Optional for Debugging)
 with st.sidebar:
