@@ -77,3 +77,6 @@ Pull requests are welcome! For major changes, open an issue first to discuss.
 
 🙋 Author
 Made with ❤️ by @RavonHart
+
+Images/UI:
+![Demo](UI-flashcard.png)
