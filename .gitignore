@@ -1,10 +1,21 @@
+# Python artifacts
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+
+# macOS
 *.DS_Store
-.env
+
+# Virtual environments
 .venv/
-.idea/
-sample_inputs/*
 venv/
+
+# Env vars & secrets
+.env
+
+# IDE/project folders
+.idea/
+
+# Sample input files
+sample_inputs/*
