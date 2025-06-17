@@ -1,12 +1,14 @@
 import re
 from typing import List, Dict
 import google.generativeai as genai
-from dotenv import load_dotenv
+
 import os
 
-load_dotenv()  # Load variables from .env file
-#API CONFIG
-API_KEY = os.getenv("GEMINI_API_KEY")
+import streamlit as st
+import google.generativeai as genai
+
+# Load API key from Streamlit secrets
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
 
 MODEL_NAME = "gemini-1.5-flash"  # or "gemini-1.5-pro"
