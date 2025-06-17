@@ -11,7 +11,7 @@
 from transformers import pipeline, AutoTokenizer
 import re
 from typing import List, Dict, Optional
-import torch
+
 # Constants
 PROMPT_OVERHEAD_TOKENS = 150
 MAX_INPUT_TOKENS = 512 - PROMPT_OVERHEAD_TOKENS

@@ -1,4 +1,4 @@
-import torch
+
 import streamlit as st
 
 from utils import extract_text
