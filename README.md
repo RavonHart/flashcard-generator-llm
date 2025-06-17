@@ -5,74 +5,75 @@ This tool lets you upload or paste educational content and automatically generat
 
 ## 🚀 Features
 
-- Upload `.txt` or `.pdf` content
-- Paste text directly
-- Extract and preview content
-- Subject selection for context
-- Ready for flashcard generation (LLM integration coming next)
+- ✅ Upload PDFs or paste raw text
+- ✅ Generate 10–15 question-answer flashcards via Gemini Pro
+- ✅ Clean UI with Streamlit
+- ✅ Flashcards are well-structured, contextual, and exam-ready
+- ✅ Export as `.csv` or `.json`
+- ✅ Optional: Difficulty levels, multilingual support, structure-aware generation (coming soon)
 
 ## 📦 Tech Stack
 
-- Python
-- Streamlit
-- PyMuPDF (for PDF extraction)
-
-## 📁 How to Run
+- Python 3.9+
+- [Streamlit](https://streamlit.io)
+- [Google Generative AI SDK (Gemini Pro)](https://ai.google.dev/)
+- PyMuPDF (`fitz`) for PDF extraction
+## ⚙️ Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/RavonHart/flashcard-generator-llm.git
+cd flashcard-generator-llm
+
+# Create a virtual environment
+python -m venv .venv
+source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
-streamlit run app/main.py
+
+🔐 Environment Variables
+Create a .env file in the root directory:
+
+-GOOGLE_API_KEY=your_gemini_api_key_here
+
+🧠 Usage
+
+streamlit run app.py
+Then go to http://localhost:8501 in your browser.
+
+📤 Export Options
+After generating flashcards, you can:
+
+✅ Download as .csv or .json
+
+✅ Review and edit (coming soon)
+
+❌ Anki / Quizlet export (not yet implemented)
+
+🧪 Development Notes
+Gemini Pro is now the default LLM.
+
+The previous FLAN-T5 logic has been retained in models/flan_t5_model.py but is not used anymore.
+
+Heavy files and venv/ are excluded from Git. See .gitignore.
 
 ## 📂 Folder Structure
-flashcard-generator-llm/
-├── app/
-│   ├── main.py         ← Streamlit app
-│   └── utils.py        ← Text extraction helpers
-├── sample_inputs/      ← Put your .pdf/.txt files here for testing
-├── README.md
-└── requirements.txt
+├── app.py
+├── models/
+│   ├── gemini_model.py
+│   └── flan_t5_model.py   # Deprecated
+├── utils/
+│   ├── pdf_reader.py
+│   └── text_processing.py
+├── sample_inputs/
+│   └── test.pdf
+├── .env
+├── requirements.txt
+└── README.md
 
-## 📄 Requirements
-streamlit
-PyMuPDF
-=======
-# 🧠 Flashcard Generator with LLM
+🤝 Contributing
+Pull requests are welcome! For major changes, open an issue first to discuss.
 
-This tool lets you upload or paste educational content and automatically generates flashcards using a Large Language Model (LLM).
-
-## 🚀 Features
-
-- Upload `.txt` or `.pdf` content
-- Paste text directly
-- Extract and preview content
-- Subject selection for context
-- Ready for flashcard generation (LLM integration coming next)
-
-## 📦 Tech Stack
-
-- Python
-- Streamlit
-- PyMuPDF (for PDF extraction)
-
-## 📁 How to Run
-
-```bash
-pip install -r requirements.txt
-streamlit run app/main.py
-
-📂 Folder Structure
-
-
-flashcard-generator-llm/
-├── app/
-│   ├── main.py         ← Streamlit app
-│   └── utils.py        ← Text extraction helpers
-├── sample_inputs/      ← Put your .pdf/.txt files here for testing
-├── README.md
-└── requirements.txt
-📄 Requirements
-
-
-streamlit
-PyMuPDF
->>>>>>> 45bb6aa ( Update: improved README formatting/content)
+🙋 Author
+Made with ❤️ by @RavonHart
